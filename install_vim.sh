@@ -7,7 +7,7 @@ echo $(which python)
 echo $($(which python) --version)
 
 echo $PATH
-export PATH="/bin:/usr/bin:/home/travis/bin"
+export PATH="/home/travis/bin:/usr/bin:/bin"
 echo $PATH
 
 build_vanilla_vim () {
