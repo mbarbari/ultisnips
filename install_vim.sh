@@ -3,8 +3,15 @@
 # Installs a known version of vim in the travis test runner.
 set -ex
 
+# Find out which python version travis wants us to run with. 
+local PYTHON_VERSION="$(python --version 2>&1 | sed 's/Python '//)"
+
 # Overwrite our path so that we are using the python version we install
-# manually.
+# manually further down. This is needed to make sure Vim picks up the correct
+# python version - it either uses the one in the system path (which is the
+# wrong version) or it crashes on start.
+# The only work around I found is installing both Python and Vim from scratch -
+# oh well...
 export PATH="$HOME/bin:/usr/bin:/bin"
 echo $PATH
 
@@ -44,7 +51,6 @@ build_vanilla_vim () {
 }
 
 build_python () {
-   local PYTHON_VERSION="$(python --version 2>&1 | sed 's/Python '//)"
    local URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
 
    mkdir python_build
