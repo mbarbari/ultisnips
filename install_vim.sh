@@ -3,11 +3,9 @@
 # Installs a known version of vim in the travis test runner.
 set -ex
 
-echo $(which python)
-echo $($(which python) --version)
-
-echo $PATH
-export PATH="/home/travis/bin:/usr/bin:/bin"
+# Overwrite our path so that we are using the python version we install
+# manually.
+export PATH="$HOME/bin:/usr/bin:/bin"
 echo $PATH
 
 build_vanilla_vim () {
@@ -46,8 +44,8 @@ build_vanilla_vim () {
 }
 
 build_python () {
-   local PYTHON_VERSION="3.4.3"
-   local URL="https://www.python.org/ftp/python/3.4.3/Python-${PYTHON_VERSION}.tgz"
+   local PYTHON_VERSION=$(python --version)
+   local URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
 
    mkdir python_build
    pushd python_build
@@ -71,10 +69,6 @@ else
    echo "Unknown VIM_VERSION: $VIM_VERSION"
    exit 1
 fi
-
-printf "py3 import sys;print(sys.version);\nquit" | /home/travis/bin/vim  -e -V9myVimLog
-
-cat myVimLog
 
 # Clone the dependent plugins we want to use.
 ./test_all.py --clone-plugins

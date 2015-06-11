@@ -1,8 +1,8 @@
 language: python
 
 python:
-  # - 2.7
-  # - 3.3
+  - 2.7
+  - 3.3
   - 3.4
   # - nightly
 env:
@@ -25,11 +25,5 @@ install:
    - ./install_vim.sh
    - sudo ln -sf /home/travis/bin/vim /usr/bin/vim
 
-
-
-before_script:
-  - printf "py3 import sys;print(sys.version);\nquit" | /home/travis/bin/vim  -e -V9myVimLog
-  - tmux new -d -s vim
-  - exit 1
-
-script: ./test_all.py -v --plugins --session vim
+script:
+   - ./travis_test.sh
