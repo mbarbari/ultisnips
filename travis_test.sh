@@ -8,19 +8,22 @@ echo $PATH
 
 tmux new -d -s vim
 
-PYTHON="/home/bin/python"
-VIM="/home/bin/vim"
+VIM="${HOME}/bin/vim"
+
+if [[ $TRAVIS_PYTHON_VERSION =~ "2." ]]; then
+   PYTHON="${HOME}/bin/python"
+   PY_IN_VIM="py"
+else
+   PYTHON="${HOME}/bin/python3"
+   PY_IN_VIM="py3"
+fi
 
 echo "Using python from: $PYTHON. Version: $($PYTHON --version 2>&1)"
 echo "Using vim from: $VIM. Version: $($VIMn)"
 
-if [[ $TRAVIS_PYTHON_VERSION =~ "2." ]]; then
-   printf "py import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
-else
-   printf "py3 import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
-fi
+printf "${PY_IN_VIM} import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
 
 cat myVimLog
 
-# NOCOMMIT(#hrapp): you pass the correct vim here
+# NOCOMMIT(#hrapp): you pass the correct vim binary here
 $PYTHON ./test_all.py -v --plugins --session vim
