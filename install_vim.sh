@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # NOCOMMIT(#hrapp): rename to travis_install.sh
+# # NOCOMMIT(#hrapp): nighlies do not work that way
 
 # Installs a known version of vim in the travis test runner.
 set -ex

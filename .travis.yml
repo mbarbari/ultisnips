@@ -14,6 +14,8 @@ matrix:
     # TODO(sirver): Neovim does not play well with our testing right now.
     - env: VIM_VERSION="NEOVIM"
 
+# NOCOM(#sirver): remove the linking of vim to /usr/bin
+
 install:
    # Some of these commands fail transiently. We keep retrying them until they succeed.
    # This PPA contains tmux 1.8.
@@ -21,7 +23,6 @@ install:
    - until sudo add-apt-repository ppa:neovim-ppa/unstable -y; do sleep 10; done
    - until sudo apt-get update -qq; do sleep 10; done
    - until sudo apt-get install -qq -y --force-yes tmux xclip gdb neovim; do sleep 10; done
-   - sudo dpkg -l | grep -i python
    - ./install_vim.sh
    - sudo ln -sf /home/travis/bin/vim /usr/bin/vim
 
