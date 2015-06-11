@@ -22,8 +22,6 @@ echo "Using python from: $PYTHON. Version: $($PYTHON --version 2>&1)"
 echo "Using vim from: $VIM. Version: $($VIMn)"
 
 printf "${PY_IN_VIM} import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
-
 cat myVimLog
 
-# NOCOMMIT(#hrapp): you pass the correct vim binary here
-$PYTHON ./test_all.py -v --plugins --session vim
+$PYTHON ./test_all.py -v --plugins --session vim --vim $VIM

@@ -2,19 +2,17 @@ language: python
 
 python:
   - 2.7
+  - 3.2
   - 3.3
   - 3.4
-  - nightly
 env:
   - VIM_VERSION="74"
-  # - VIM_VERSION="NEOVIM"
+  - VIM_VERSION="NEOVIM"
 
 matrix:
   allow_failures:
     # TODO(sirver): Neovim does not play well with our testing right now.
     - env: VIM_VERSION="NEOVIM"
-
-# NOCOM(#sirver): remove the linking of vim to /usr/bin
 
 install:
    # Some of these commands fail transiently. We keep retrying them until they succeed.
@@ -23,8 +21,7 @@ install:
    - until sudo add-apt-repository ppa:neovim-ppa/unstable -y; do sleep 10; done
    - until sudo apt-get update -qq; do sleep 10; done
    - until sudo apt-get install -qq -y --force-yes tmux xclip gdb neovim; do sleep 10; done
-   - ./install_vim.sh
-   - sudo ln -sf /home/travis/bin/vim /usr/bin/vim
+   - ./travis_install.sh
 
 script:
    - ./travis_test.sh
