@@ -24,4 +24,5 @@ echo "Using vim from: $VIM. Version: $($VIMn)"
 printf "${PY_IN_VIM} import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
 cat myVimLog
 
-$PYTHON ./test_all.py -v --plugins --session vim --vim $VIM
+# NOCOM(#sirver): remove SimpleExpand again.
+$PYTHON ./test_all.py -v --plugins --session vim --vim $VIM SimpleExpand
