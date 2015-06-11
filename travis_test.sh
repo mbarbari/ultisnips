@@ -9,7 +9,7 @@ echo $PATH
 
 tmux new -d -s vim
 
-echo "Using Python from: $(which python). Version: $(python --version)"
+echo "Using Python from: $(which python). Version: $(python --version 2>&1)"
 echo "Using vim from: $(which vim). Version: $(vim --version)"
 
 if [[ $TRAVIS_PYTHON_VERSION =~ "2." ]]; then

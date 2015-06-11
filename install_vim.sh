@@ -44,7 +44,7 @@ build_vanilla_vim () {
 }
 
 build_python () {
-   local PYTHON_VERSION=$(python --version)
+   local PYTHON_VERSION="$(python --version 2>&1 | sed 's/Python '//)"
    local URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
 
    mkdir python_build
