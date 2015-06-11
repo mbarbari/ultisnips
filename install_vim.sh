@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+# NOCOMMIT(#hrapp): rename to travis_install.sh
+
 # Installs a known version of vim in the travis test runner.
 set -ex
 
 # Find out which python version travis wants us to run with. 
-local PYTHON_VERSION="$(python --version 2>&1 | sed 's/Python '//)"
+PYTHON_VERSION="$(python --version 2>&1 | sed 's/Python '//)"
 
 # Overwrite our path so that we are using the python version we install
 # manually further down. This is needed to make sure Vim picks up the correct

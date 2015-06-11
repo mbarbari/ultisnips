@@ -2,8 +2,7 @@
 
 set -ex
 
-# Overwrite our path so that we are using the python version we install
-# manually.
+# See travis_install.sh to why this is needed.
 export PATH="$HOME/bin:/usr/bin:/bin"
 echo $PATH
 
