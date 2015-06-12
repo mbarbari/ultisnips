@@ -134,6 +134,7 @@ class VimTestCase(unittest.TestCase, TempFileManager):
         self._extra_options_pre_init(vim_config)
 
         # NOCOM(#sirver): remove?
+        vim_config.append('%s print(vim._get_paths())' % ('py3' if PYTHON3 else 'py'))
         vim_config.append('%s import UltiSnips' % ('py3' if PYTHON3 else 'py'))
 
         # Now activate UltiSnips.
