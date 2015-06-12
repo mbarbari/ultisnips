@@ -109,15 +109,13 @@ class VimInterface(TempFileManager):
             os.remove(done_file)
 
         post_config = []
-        post_config.append('%s << EOF' % ('py3' if PYTHON3 else 'py'))
-        post_config.append('import vim')
+        PY = 'py3' if PYTHON3 else 'py'
+        post_config.append('%s import vim' % PY)
         post_config.append(
-            "with open('%s', 'w') as pid_file: pid_file.write(vim.eval('getpid()'))" %
-            pid_file)
+            "%s with open('%s', 'w') as pid_file: pid_file.write(vim.eval('getpid()'))" %
+            (PY, pid_file))
         post_config.append(
-            "with open('%s', 'w') as done_file: pass" %
-            done_file)
-        post_config.append('EOF')
+            "%s with open('%s', 'w') as done_file: pass" % (PY, done_file))
 
         config_content = textwrap.dedent(os.linesep.join(config + post_config)
                 + '\n')

@@ -18,8 +18,8 @@ echo $PATH
 build_vanilla_vim () {
    local URL=$1; shift;
 
-   mkdir vim_build
-   pushd vim_build
+   mkdir ~/vim_build
+   pushd ~/vim_build
 
    until curl $URL -o vim.tar.bz2; do sleep 10; done
    tar xjf vim.tar.bz2
@@ -53,8 +53,8 @@ build_vanilla_vim () {
 build_python () {
    local URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
 
-   mkdir python_build
-   pushd python_build
+   mkdir ~/python_build
+   pushd ~/python_build
 
    until curl $URL -o python.tar.gz; do sleep 10; done
    tar xzf python.tar.gz
