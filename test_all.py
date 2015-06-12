@@ -151,7 +151,7 @@ if __name__ == '__main__':
             if options.clone_plugins:
                 return
 
-        v = 2 if options.verbose else 1
+        v = 1000 if options.verbose else 1
         successfull = unittest.TextTestRunner(verbosity=v,
                                           failfast=options.exitfirst).run(suite).wasSuccessful()
         return 0 if successfull else 1

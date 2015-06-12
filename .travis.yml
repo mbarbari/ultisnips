@@ -7,7 +7,7 @@ python:
   - 3.4
 env:
   - VIM_VERSION="74"
-  - VIM_VERSION="NEOVIM"
+  # - VIM_VERSION="NEOVIM"
 
 matrix:
   allow_failures:

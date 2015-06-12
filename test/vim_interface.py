@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+import logging
 import os
 import re
 import shutil
@@ -118,11 +119,15 @@ class VimInterface(TempFileManager):
             done_file)
         post_config.append('EOF')
 
-        config_path = self.write_temp('vim_config.vim',
-                                      textwrap.dedent(os.linesep.join(config + post_config) + '\n'))
+        config_content = textwrap.dedent(os.linesep.join(config + post_config)
+                + '\n')
+        print ("--- Vim config used ----")
+        print (config_content)
+        print ("--- End of vim config used ----")
+        config_path = self.write_temp('vim_config.vim', config_content)
 
         # Note the space to exclude it from shell history.
-        self.send(""" %s -u %s\r\n""" % (self._vim_executable, config_path))
+        self.send(""" %s -u %s -V9/tmp/vimlog\r\n""" % (self._vim_executable, config_path))
         wait_until_file_exists(done_file)
         self._vim_pid = int(open(pid_file, 'r').read())
 
@@ -130,6 +135,10 @@ class VimInterface(TempFileManager):
         self.send(3 * ESC + ':qa!\n')
         while is_process_running(self._vim_pid):
             time.sleep(.05)
+        vim_log = read_text_file("/tmp/vimlog")
+        print ("--- Vim log ----")
+        print (vim_log)
+        print ("--- End of vim log ----")
 
 
 class VimInterfaceTmux(VimInterface):

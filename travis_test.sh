@@ -25,4 +25,4 @@ printf "${PY_IN_VIM} import sys;print(sys.version);\nquit" | $VIM -e -V9myVimLog
 cat myVimLog
 
 # NOCOM(#sirver): remove SimpleExpand again.
-$PYTHON ./test_all.py -v --plugins --session vim --vim $VIM SimpleExpand
+$PYTHON ./test_all.py -v --plugins --session vim --vim $VIM SimpleExpand_ExpectCorrectResult
