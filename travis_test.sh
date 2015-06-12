@@ -2,6 +2,8 @@
 
 set -ex
 
+find /home/travis/build
+
 # See travis_install.sh to why this is needed.
 export PATH="$HOME/bin:/usr/bin:/bin"
 echo $PATH
